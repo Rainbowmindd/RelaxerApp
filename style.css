@@ -1,0 +1,109 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-image: url('sky.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	color: #fff;
+	font-family: 'VT323', monospace;
+	font-size: 30px;
+	min-height: 100vh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 300px;
+	width: 300px;
+	margin: auto;
+	position: relative;
+	transform: scale(1);
+}
+
+.gradient-circle {
+	background: conic-gradient(#a6d6e9 0%, #8ad1f8 40%, #fff 40%, #fff 60%, #69c3f3 60%, #01286a 100%);
+
+	height: 320px;
+	width: 320px;
+	position: absolute; /*position within the container*/
+	top: -10px;
+	left: -10px;
+	z-index: -2; /*to move it behind the text*/
+	border-radius: 50%; /*circle*/
+}
+
+.circle {
+	/*the solid color circle*/
+	background-color: #00306e;
+	height: 100%; /*size of container 300px*/
+	width: 100%;
+	position: absolute; /*within the container*/
+	top: 0;
+	left: 0;
+	z-index: -1; /*in front of the gradient circle*/
+	border-radius: 50%;
+}
+
+.pointer-container {
+	position: absolute;
+	top: -40px; /*up above the container*/
+	left: 140px;
+	width: 20px;
+	height: 190px;
+	animation: rotate 7.5s linear forwards infinite;
+	transform-origin: bottom center;
+} /*with only this we dont see anything, only after adding the pointer*/
+
+.pointer {
+	background-color: #fff;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+	display: block;
+}
+
+/*we want to apply these animations under certain conditions
+if the container has the class grow*/
+.container.grow {
+	animation: grow 3s linear forwards;
+}
+/*etc*/
+.container.shrink {
+	animation: shrink 3s linear forwards;
+}
+
+@keyframes rotate {
+	/*to rotate the pointer*/
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes grow {
+	from {
+		transform: scale(1); /*1 is the default scale*/
+	}
+	to {
+		transform: scale(1.2);
+	}
+}
+@keyframes shrink {
+	from {
+		transform: scale(1.2); /* 1.2 because once its finished growing its 1.2*/
+	}
+	to {
+		transform: scale(1); /*back to default*/
+	}
+}
